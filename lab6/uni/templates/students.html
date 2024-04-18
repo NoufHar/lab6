@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Students</title>
+    <style>
+        #submit{
+            width: 90px;
+            height: 20px;
+            background-color: wheat;
+        }
+        #submit:hover{
+            background-color: pink;
+        }
+        h1,h2{
+            color: purple;
+        }
+        
+    </style>
+</head>
+<body>
+    <h1>List of Students</h1>
+    <ul>
+        {% for student in students %}
+        <li>
+            <a href="{% url 'details' student.id %}">{{ student.first }} {{ student.last }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+    <h2>Add New Student</h2>
+    <form method="POST" action="{% url 'students' %}">
+        {% csrf_token %}
+        <input type="text" placeholder="first name" name="first">
+        
+        <input type="text" placeholder="last name" name="last">
+
+        <input type="text" placeholder="email" name="email">
+
+        <input type="submit" value="Add Student" id="submit">
+    </form>
+    <br>
+    <a href="{% url 'courses' %}">Add Course</a>
+</body>
+</html>
